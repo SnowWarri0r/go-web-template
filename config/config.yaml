@@ -1,3 +1,17 @@
 server:
   addr: :8000
   salt: d296YWlqaWF5dWFu
+
+dev:
+  db: localhost:3306
+  mysqlMaxOpenConns: 400
+  mysqlMaxIdleConns: 100
+  mysqlConnMaxIdleTime: 3600000000000
+  mysqlConnMaxLifeTime: 7200000000000
+
+prod:
+  db: mysql:3306
+  mysqlMaxOpenConns: 400
+  mysqlMaxIdleConns: 100
+  mysqlConnMaxIdleTime: 3600000000000
+  mysqlConnMaxLifeTime: 7200000000000

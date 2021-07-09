@@ -3,37 +3,87 @@ package config
 import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
-	"log"
 	"os"
 )
 
-var config=make(map[interface{}]interface{})
+var config = make(map[interface{}]interface{})
 
 func InitConfig() {
-	f,err:=os.Open("./config/config.yaml")
+	f, err := os.Open("./config/config.yaml")
 	if err != nil {
-		log.Println(err.Error())
-		log.Fatalln("Opening config file failed")
+		Log().Println(err.Error())
+		Log().Fatalln("Opening config file failed")
 	}
-	data,err:=ioutil.ReadAll(f)
+	data, err := ioutil.ReadAll(f)
 	if err != nil {
-		log.Fatalln("Reading config file failed")
+		Log().Fatalln("Reading config file failed")
 	}
-	err=yaml.Unmarshal(data,&config)
+	err = yaml.Unmarshal(data, &config)
 	if err != nil {
-		log.Fatalln("Config has format error")
+		Log().Fatalln("Config has format error")
 	}
 }
+
 var (
-	addr string
-	salt string
+	addr          string
+	salt          string
+	mode          string
+	mysqlUser     string
+	mysqlPasswd   string
+	mysqlDatabase string
+	dbUrl         string
+	mysqlMaxOpenConns int
+	mysqlMaxIdleConns int
+	mysqlConnMaxIdleTime int
+	mysqlConnMaxLifeTime int
 )
+
 func LoadConfig() {
 	var ok bool
-	if addr,ok=config["server"].(map[interface{}]interface{})["addr"].(string);!ok{
-		log.Fatalln("cannot read addr config")
+	mode = os.Getenv("APP_MODE")
+	mysqlUser = os.Getenv("MYSQL_USER")
+	mysqlPasswd = os.Getenv("MYSQL_PASSWORD")
+	mysqlDatabase = os.Getenv("MYSQL_DATABASE")
+	if len(mode) < 1 {
+		mode = "dev"
 	}
-	if salt,ok=config["server"].(map[interface{}]interface{})["salt"].(string);!ok{
-		log.Fatalln("cannot read salt config")
+	if addr, ok = config["server"].(map[interface{}]interface{})["addr"].(string); !ok {
+		Log().Fatalln("cannot read addr config")
+	}
+	if salt, ok = config["server"].(map[interface{}]interface{})["salt"].(string); !ok {
+		Log().Fatalln("cannot read salt config")
+	}
+	if mode == "prod" {
+		if dbUrl, ok = config["prod"].(map[interface{}]interface{})["db"].(string); !ok {
+			Log().Fatalln("cannot read db config")
+		}
+		if mysqlMaxOpenConns, ok = config["prod"].(map[interface{}]interface{})["mysqlMaxOpenConns"].(int); !ok {
+			Log().Fatalln("cannot read db config")
+		}
+		if mysqlMaxIdleConns, ok = config["prod"].(map[interface{}]interface{})["mysqlMaxIdleConns"].(int); !ok {
+			Log().Fatalln("cannot read db config")
+		}
+		if mysqlConnMaxIdleTime, ok = config["prod"].(map[interface{}]interface{})["mysqlConnMaxIdleTime"].(int); !ok {
+			Log().Fatalln("cannot read db config")
+		}
+		if mysqlConnMaxLifeTime, ok = config["prod"].(map[interface{}]interface{})["mysqlConnMaxLifeTime"].(int); !ok {
+			Log().Fatalln("cannot read db config")
+		}
+	} else {
+		if dbUrl, ok = config["dev"].(map[interface{}]interface{})["db"].(string); !ok {
+			Log().Fatalln("cannot read db config")
+		}
+		if mysqlMaxOpenConns, ok = config["dev"].(map[interface{}]interface{})["mysqlMaxOpenConns"].(int); !ok {
+			Log().Fatalln("cannot read db config")
+		}
+		if mysqlMaxIdleConns, ok = config["dev"].(map[interface{}]interface{})["mysqlMaxIdleConns"].(int); !ok {
+			Log().Fatalln("cannot read db config")
+		}
+		if mysqlConnMaxIdleTime, ok = config["dev"].(map[interface{}]interface{})["mysqlConnMaxIdleTime"].(int); !ok {
+			Log().Fatalln("cannot read db config")
+		}
+		if mysqlConnMaxLifeTime, ok = config["dev"].(map[interface{}]interface{})["mysqlConnMaxLifeTime"].(int); !ok {
+			Log().Fatalln("cannot read db config")
+		}
 	}
 }
