@@ -47,37 +47,37 @@ func FailureData(data interface{}) Result {
 }
 
 func WrongParam() Result {
-	return New(WRONG_PARAMETERS, nil)
+	return New(WrongParameters, nil)
 }
 
 func WrongParamInfo(message string) Result {
-	return New(WRONG_PARAMETERS.SetTheMessage(message), nil)
+	return New(WrongParameters.SetTheMessage(message), nil)
 }
 
 func WrongParamInfoAndData(message string, data interface{}) Result {
-	return New(WRONG_PARAMETERS.SetTheMessage(message), data)
+	return New(WrongParameters.SetTheMessage(message), data)
 }
 
 func WrongParamData(data interface{}) Result {
-	return New(WRONG_PARAMETERS, data)
+	return New(WrongParameters, data)
 }
 
 func UselessReq() Result {
-	return New(USELESS_REQUEST, nil)
+	return New(UselessRequest, nil)
 }
 
 func UselessReqInfo(message string) Result {
-	return New(USELESS_REQUEST.SetTheMessage(message), nil)
+	return New(UselessRequest.SetTheMessage(message), nil)
 }
 
 func UselessReqInfoAndData(message string, data interface{}) Result {
-	return New(USELESS_REQUEST.SetTheMessage(message), data)
+	return New(UselessRequest.SetTheMessage(message), data)
 }
 
 func UselessReqData(data interface{}) Result {
-	return New(USELESS_REQUEST, data)
+	return New(UselessRequest, data)
 }
 
 func Error() Result {
-	return New(INTERNAL_SERVER_ERROR, nil)
+	return New(InternalServerError, nil)
 }

@@ -25,11 +25,15 @@ func InitConfig() {
 	}
 }
 var (
-	Addr string
+	addr string
+	salt string
 )
 func LoadConfig() {
 	var ok bool
-	if Addr,ok=config["server"].(map[interface{}]interface{})["addr"].(string);!ok{
+	if addr,ok=config["server"].(map[interface{}]interface{})["addr"].(string);!ok{
 		log.Fatalln("cannot read addr config")
+	}
+	if salt,ok=config["server"].(map[interface{}]interface{})["salt"].(string);!ok{
+		log.Fatalln("cannot read salt config")
 	}
 }

@@ -6,11 +6,11 @@ type ResultStatus struct {
 }
 
 var (
-	SUCCESS = ResultStatus{status: 0, message: "success"}
-	FAILURE = ResultStatus{status: 1, message: "failure"}
-	WRONG_PARAMETERS = ResultStatus{status: 2, message: "wrong param"}
-	USELESS_REQUEST = ResultStatus{status: 3, message: "useless request"}
-	INTERNAL_SERVER_ERROR = ResultStatus{status: 500, message: "Internal Server Error"}
+	SUCCESS             = ResultStatus{status: 0, message: "success"}
+	FAILURE             = ResultStatus{status: 1, message: "failure"}
+	WrongParameters     = ResultStatus{status: 2, message: "wrong param"}
+	UselessRequest      = ResultStatus{status: 3, message: "useless request"}
+	InternalServerError = ResultStatus{status: 500, message: "Internal Server Error"}
 )
 
 func (r ResultStatus) SetTheMessage(message string) ResultStatus {

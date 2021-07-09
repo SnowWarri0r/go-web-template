@@ -1,2 +1,3 @@
 server:
   addr: :8000
+  salt: d296YWlqaWF5dWFu

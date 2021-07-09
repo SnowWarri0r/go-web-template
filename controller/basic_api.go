@@ -46,9 +46,16 @@ func err(c *gin.Context) {
 	c.AsciiJSON(http.StatusOK,util.Error())
 }
 
-func unauthorized(c *gin.Context) {
+func Unauthorized(c *gin.Context) {
 	c.AsciiJSON(http.StatusUnauthorized,gin.H{
-		"status":0,
+		"status":401,
 		"message":"Unauthorized",
+	})
+}
+
+func Forbidden(c *gin.Context) {
+	c.AsciiJSON(http.StatusForbidden,gin.H{
+		"status":403,
+		"message":"Forbidden",
 	})
 }
