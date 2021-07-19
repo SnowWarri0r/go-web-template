@@ -1,0 +1,2 @@
+time="2021-07-19 17:36:39" level=info msg="Shutting down server..." func=go-web-template/router.CloseRouter file="E:/go-web-template/router/router.go:29"
+time="2021-07-19 17:36:39" level=fatal msg="listen: http: Server closed\n\n" func=main.main.func1 file="E:/go-web-template/main.go:17"

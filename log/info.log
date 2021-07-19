@@ -1,3 +1,0 @@
-time="2021-07-09T17:32:10+08:00" level=info msg="Shutting down server..."
-time="2021-07-09T17:32:51+08:00" level=info msg="Shutting down server..."
-time="2021-07-09T17:32:51+08:00" level=fatal msg="listen: http: Server closed\n\n"

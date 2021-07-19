@@ -35,7 +35,7 @@ func InitDB() {
 		Logger:                                   newLogger,
 	}
 	db, err = gorm.Open(mysql.New(mysql.Config{
-		DSN: mysqlUser + ":" + mysqlPasswd + "@tcp(" + dbUrl + ")/" + mysqlDatabase + "?charset=utf8mb4&parseTime=True&loc=Local",
+		DSN: mysqlUser + ":" + mysqlPasswd + "@tcp(" + config.Conf.DB + ")/" + mysqlDatabase + "?charset=utf8mb4&parseTime=True&loc=Local",
 		DefaultStringSize:         256,
 		DisableDatetimePrecision:  true,
 		DontSupportRenameColumn:   true,
@@ -52,13 +52,13 @@ func InitDB() {
 		return
 	}
 	//设置连接池最大连接数
-	sqlDB.SetMaxOpenConns(mysqlMaxOpenConns)
+	sqlDB.SetMaxOpenConns(config.Conf.MySQLMaxOpenConnections)
 	//设置连接池最大闲置连接数
-	sqlDB.SetMaxIdleConns(mysqlMaxIdleConns)
+	sqlDB.SetMaxIdleConns(config.Conf.MySQLMaxIdleConnections)
 	//设置连接最大闲置时间
-	sqlDB.SetConnMaxIdleTime(time.Duration(mysqlConnMaxIdleTime))
+	sqlDB.SetConnMaxIdleTime(time.Duration(config.Conf.MySQLConnMaxIdleTime))
 	//设置连接最大存活时间
-	sqlDB.SetConnMaxLifetime(time.Duration(mysqlConnMaxLifeTime))
+	sqlDB.SetConnMaxLifetime(time.Duration(config.Conf.MySQLConnMaxLifeTime))
 	// 自动迁移设置todo
 }
 
