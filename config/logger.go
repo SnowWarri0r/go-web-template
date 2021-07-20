@@ -15,7 +15,7 @@ func InitLogger() {
 	} else {
 		log.SetLevel(logrus.DebugLevel)
 	}
-	log.SetReportCaller(true)
+	log.SetReportCaller(config.Conf.ReportCaller)
 	log.SetFormatter(&logrus.TextFormatter{TimestampFormat: "2006-01-02 15:04:05"})
 	file, err := os.OpenFile("./log/"+time.Now().Format("2006-01-02")+".log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err == nil {

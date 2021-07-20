@@ -8,6 +8,9 @@ dev:
   mysqlMaxIdleConns: 100
   mysqlConnMaxIdleTime: 3600000000000
   mysqlConnMaxLifeTime: 7200000000000
+  reportCaller: true
+  redis: localhost:6379
+  redisPoolSize: 100
 
 prod:
   db: mysql:3306
@@ -15,3 +18,6 @@ prod:
   mysqlMaxIdleConns: 100
   mysqlConnMaxIdleTime: 3600000000000
   mysqlConnMaxLifeTime: 7200000000000
+  reportCaller: false
+  redis: redis:6379
+  redisPoolSize: 200

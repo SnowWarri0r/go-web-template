@@ -3,6 +3,7 @@ package config
 import (
 	"database/sql"
 	"github.com/gin-gonic/gin"
+	"go-web-template/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -31,11 +32,10 @@ func InitDB() {
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true, //建表命名约束为根据结构体名称单数小写命名
 		},
-		DisableForeignKeyConstraintWhenMigrating: true,
-		Logger:                                   newLogger,
+		Logger: newLogger,
 	}
 	db, err = gorm.Open(mysql.New(mysql.Config{
-		DSN: mysqlUser + ":" + mysqlPasswd + "@tcp(" + config.Conf.DB + ")/" + mysqlDatabase + "?charset=utf8mb4&parseTime=True&loc=Local",
+		DSN:                       mysqlUser + ":" + mysqlPasswd + "@tcp(" + config.Conf.DB + ")/" + mysqlDatabase + "?charset=utf8mb4&parseTime=True&loc=Local",
 		DefaultStringSize:         256,
 		DisableDatetimePrecision:  true,
 		DontSupportRenameColumn:   true,
@@ -59,12 +59,16 @@ func InitDB() {
 	sqlDB.SetConnMaxIdleTime(time.Duration(config.Conf.MySQLConnMaxIdleTime))
 	//设置连接最大存活时间
 	sqlDB.SetConnMaxLifetime(time.Duration(config.Conf.MySQLConnMaxLifeTime))
-	// 自动迁移设置todo
+	// 自动迁移设置
+	if err = db.AutoMigrate(&model.User{}); err != nil {
+		Log().Fatalln("auto migration failed")
+	}
 }
 
 func DB(ctx *gin.Context) *gorm.DB {
 	return db.WithContext(ctx)
 }
+
 // DisconnectDB 断开与数据库的连接
 func DisconnectDB() {
 	mysqlDB, _ := db.DB()

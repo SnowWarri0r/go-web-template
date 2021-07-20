@@ -25,6 +25,9 @@ type Conf struct {
 	MySQLMaxIdleConnections int    `yaml:"mysqlMaxIdleConns"`
 	MySQLConnMaxIdleTime    int64  `yaml:"mysqlConnMaxIdleTime"`
 	MySQLConnMaxLifeTime    int64  `yaml:"mysqlConnMaxLifeTime"`
+	ReportCaller bool `yaml:"reportCaller"`
+	RedisUrl string `yaml:"redis"`
+	RedisPoolSize int `yaml:"redisPoolSize"`
 }
 
 var load = &Load{}
@@ -51,6 +54,7 @@ var (
 	mysqlUser     string
 	mysqlPasswd   string
 	mysqlDatabase string
+	redisPasswd string
 )
 
 func LoadConfig() {
@@ -59,6 +63,7 @@ func LoadConfig() {
 	mysqlUser = os.Getenv("MYSQL_USER")
 	mysqlPasswd = os.Getenv("MYSQL_PASSWORD")
 	mysqlDatabase = os.Getenv("MYSQL_DATABASE")
+	redisPasswd = os.Getenv("REDIS_PASSWORD")
 	if len(mode) < 1 {
 		mode = "dev"
 		config.Conf = load.Dev

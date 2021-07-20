@@ -10,6 +10,7 @@ func main() {
 	config.LoadConfig()
 	config.InitLogger()
 	config.InitDB()
+	config.InitRedis()
 	e := router.InitRouter()
 	srv := config.InitServer(e)
 	go func() {
@@ -18,5 +19,6 @@ func main() {
 		}
 	}()
 	router.CloseRouter(srv)
+	config.StopRedis()
 	config.DisconnectDB()
 }
