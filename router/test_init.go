@@ -6,6 +6,6 @@ import (
 )
 
 func initTest(routerGroup *gin.RouterGroup) {
-	routerGroup.GET("/hello",controller.Hello())
-	routerGroup.GET("/token",controller.Token())
+	routerGroup.GET("/hello", controller.Hello())
+	routerGroup.GET("/token", controller.Token())
 }

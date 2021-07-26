@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/gin-gonic/gin"
 	"go-web-template/config"
+	"go-web-template/middleware"
 	"net/http"
 	"os"
 	"os/signal"
@@ -13,8 +14,8 @@ import (
 
 func InitRouter() *gin.Engine {
 	e := gin.New()
-	e.Use(gin.Logger(), gin.Recovery())
-	testModule:=e.Group("/api/test")
+	e.Use(gin.Logger(), gin.Recovery(), middleware.Cors())
+	testModule := e.Group("/api/test")
 	initTest(testModule)
 	return e
 }

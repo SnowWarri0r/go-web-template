@@ -9,9 +9,9 @@ import (
 
 func InitServer(handler *gin.Engine) *http.Server {
 	return &http.Server{
-		Addr:    config.Server.Addr,
-		ErrorLog: log2.New(log.Writer(),"",0),
-		Handler: handler,
+		Addr:     config.Server.Addr,
+		ErrorLog: log2.New(log.Writer(), "", 0),
+		Handler:  handler,
 	}
 }
 

@@ -14,6 +14,6 @@ var (
 )
 
 func (r ResultStatus) SetTheMessage(message string) ResultStatus {
-	r.message =message
+	r.message = message
 	return r
 }

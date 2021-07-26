@@ -6,6 +6,6 @@ import (
 	"gorm.io/gorm"
 )
 
-func DB(ctx *gin.Context) *gorm.DB{
+func DB(ctx *gin.Context) *gorm.DB {
 	return config.DB(ctx)
 }

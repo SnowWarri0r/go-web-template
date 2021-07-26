@@ -25,9 +25,9 @@ type Conf struct {
 	MySQLMaxIdleConnections int    `yaml:"mysqlMaxIdleConns"`
 	MySQLConnMaxIdleTime    int64  `yaml:"mysqlConnMaxIdleTime"`
 	MySQLConnMaxLifeTime    int64  `yaml:"mysqlConnMaxLifeTime"`
-	ReportCaller bool `yaml:"reportCaller"`
-	RedisUrl string `yaml:"redis"`
-	RedisPoolSize int `yaml:"redisPoolSize"`
+	ReportCaller            bool   `yaml:"reportCaller"`
+	RedisUrl                string `yaml:"redis"`
+	RedisPoolSize           int    `yaml:"redisPoolSize"`
 }
 
 var load = &Load{}
@@ -54,7 +54,7 @@ var (
 	mysqlUser     string
 	mysqlPasswd   string
 	mysqlDatabase string
-	redisPasswd string
+	redisPasswd   string
 )
 
 func LoadConfig() {
